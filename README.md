@@ -1,1 +1,3 @@
-# Group-Project
+# UI-Coursework
+
+Organization for the User Interfaces Coursework
