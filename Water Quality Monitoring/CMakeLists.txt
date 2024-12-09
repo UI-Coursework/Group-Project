@@ -20,6 +20,8 @@ target_link_libraries(watertool PRIVATE Qt6::Widgets Qt6::Charts)
 
 qt_add_translations(watertool TS_FILES watertool_de.ts watertool_fr.ts)
 
+configure_file("Y-2024.csv" data.csv)
+
 set_target_properties(watertool PROPERTIES
     WIN32_EXECUTABLE ON
     MACOSX_BUNDLE OFF
