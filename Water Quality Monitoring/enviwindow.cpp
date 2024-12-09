@@ -33,6 +33,7 @@ void EnviWindow::createMainWidget()
   series->attachAxis(axisX);
 
   QValueAxis *axisY = new QValueAxis();
+  axisY->setTitleText(tr("Litter Amount (Garber C)"));
   axisY->setRange(0, 4);
   litter_chart->addAxis(axisY, Qt::AlignLeft);
   series->attachAxis(axisY);
@@ -55,12 +56,16 @@ void EnviWindow::createSelector()
     toolbarLayout->addWidget(new QLabel(tr("Select Location:")));
     litterLocationComboBox = new QComboBox(this);
     toolbarLayout->addWidget(litterLocationComboBox); 
-    toolbarLayout->addStretch();
     connect(litterLocationComboBox, &QComboBox::currentIndexChanged, this, &EnviWindow::updateChart);
 
     QStringList locationOptions;
     locationOptions << tr("Select Location"); //insert location for the water sample
     litterLocationComboBox->addItems(locationOptions);
+
+    QLabel *bwpExplanation = new QLabel();
+    bwpExplanation->setText(tr("\nLITTER TYPES:\nAlgal Bloom: BWP - A.B.\nAnimal Feces: BWP - A.F.\nMacroalgae: BWP - Ma\nOther Litter (incl. plastics): BWP - O.L."));
+    toolbarLayout->addWidget(bwpExplanation);
+    toolbarLayout->addStretch();
 
     mainLayout->addLayout(toolbarLayout); 
     mainLayout->addWidget(chartView);
