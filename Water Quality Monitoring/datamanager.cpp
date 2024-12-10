@@ -11,7 +11,7 @@ void DataManager::loadData(const QString& filePath) {
     try {
         for (csv::CSVRow& row : reader) {
             PollutantData data{
-                QString::fromStdString(row["id"].get<std::string>()),
+                QString::fromStdString(row["@id"].get<std::string>()),
                 QString::fromStdString(row["sample.samplingPoint"].get<std::string>()),
                 QString::fromStdString(row["sample.samplingPoint.notation"].get<std::string>()),
                 QString::fromStdString(row["sample.samplingPoint.label"].get<std::string>()),

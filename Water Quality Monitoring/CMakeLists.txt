@@ -15,6 +15,10 @@ qt_add_executable(watertool
     mainwindow.cpp
     overviewpage.cpp
     enviwindow.cpp
+    dashboard.cpp
+    compliance_dashboard.cpp
+    fluorinatedcompounds.cpp
+    pop.cpp
 )
 target_link_libraries(watertool PRIVATE Qt6::Widgets Qt6::Charts)
 
