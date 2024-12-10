@@ -2,11 +2,17 @@
 #include "overviewpage.hpp"
 #include <QLabel>
 #include <QVBoxLayout>
+#include "compliance_dashboard.hpp"
+#include "dashboard.hpp"
+#include "enviwindow.hpp"
+
 
 MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     tabWidget = new QTabWidget(this);
-    tabWidget->addTab(createPage1(), "Dashboard");
+    tabWidget->addTab(new Dashboard(), "Dashboard"); // Use the Dashboard class
     tabWidget->addTab(new OverviewPage(), "Overview");
+    tabWidget->addTab(new ComplianceDashboard(), "Compliance Dashboard");
+    tabWidget->addTab(new EnviWindow(), "Environmental Litter");
     tabWidget->addTab(createPage3(), "POP");
     setCentralWidget(tabWidget);
     setWindowTitle("Water Quality Monitoring");
@@ -16,16 +22,4 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
 MainWindow::~MainWindow() {}
 
 
-QWidget* MainWindow::createPage1() {
-    QWidget* page = new QWidget();
-    QVBoxLayout* layout = new QVBoxLayout(page);
-    layout->addWidget(new QLabel("Dashboard"));
-    return page;
-}
 
-QWidget* MainWindow::createPage3() {
-    QWidget* page = new QWidget();
-    QVBoxLayout* layout = new QVBoxLayout(page);
-    layout->addWidget(new QLabel("POP"));
-    return page;
-}
