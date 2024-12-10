@@ -13,8 +13,6 @@ public:
 
 private:
     QTabWidget* tabWidget;
-    QWidget* createPage1();
-    QWidget* createPage3();
 };
 
 #endif // MAINWINDOW_HPP
