@@ -20,7 +20,7 @@
 - Implement user authentication for multi-user access control.
 
 ## Team Members
-- Mohamed Shamir 
+- Mohamed Aik Shamir 
 - Hpone Thu 
 - Veerinrada Pianapitham 
 - Alp Akkor 
