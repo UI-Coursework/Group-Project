@@ -7,7 +7,7 @@
 #include <QDebug>
 #include "fluorinatedcompounds.hpp"
 
-MainWindow::MainWindow(QWidget *parent)
+popWindow::popWindow(QWidget *parent)
     : QMainWindow(parent)
 {
     centralWidget = new QWidget(this);
@@ -35,17 +35,17 @@ MainWindow::MainWindow(QWidget *parent)
     stackedWidget->addWidget(fluorPage);
 
     // Connect button
-    connect(switchButton, &QPushButton::clicked, this, &MainWindow::switchPage);
+    connect(switchButton, &QPushButton::clicked, this, &popWindow::switchPage);
 
     // Load initial POP data
-    QTimer::singleShot(1000, this, &MainWindow::loadPopData);
+    QTimer::singleShot(1000, this, &popWindow::loadPopData);
 }
 
-MainWindow::~MainWindow() {}
+popWindow::~popWindow() {}
 
-void MainWindow::loadPopData()
+void popWindow::loadPopData()
 {
-    QString filePath = "./data/data.csv"; // Adjust path as needed
+    QString filePath = "data.csv"; // Adjust path as needed
     if (QFile::exists(filePath)) {
         dataManager.loadData(filePath);
         updatePopPage();
@@ -54,7 +54,7 @@ void MainWindow::loadPopData()
     }
 }
 
-void MainWindow::updatePopPage()
+void popWindow::updatePopPage()
 {
     const auto &data = dataManager.getData();
 
@@ -92,7 +92,7 @@ void MainWindow::updatePopPage()
     }
 }
 
-QWidget* MainWindow::createPopWidget(const QString &name, const QVector<double> &data, bool compliant)
+QWidget* popWindow::createPopWidget(const QString &name, const QVector<double> &data, bool compliant)
 {
     QWidget *widget = new QWidget();
     QVBoxLayout *layout = new QVBoxLayout(widget);
@@ -116,7 +116,7 @@ QWidget* MainWindow::createPopWidget(const QString &name, const QVector<double> 
 }
 
 
-void MainWindow::setupChart(QChartView *chartView, const QVector<double> &data)
+void popWindow::setupChart(QChartView *chartView, const QVector<double> &data)
 {
     QLineSeries *series = new QLineSeries();
 
@@ -143,7 +143,7 @@ void MainWindow::setupChart(QChartView *chartView, const QVector<double> &data)
     chartView->setChart(chart);
 }
 
-void MainWindow::switchPage()
+void popWindow::switchPage()
 {
     if (stackedWidget->currentIndex() == 0) {
         stackedWidget->setCurrentIndex(1);

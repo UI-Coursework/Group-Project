@@ -26,7 +26,7 @@ FluorinatedCompounds::FluorinatedCompounds(QWidget *parent)
 
 void FluorinatedCompounds::loadAndDisplayData()
 {
-    dataManager.loadData("data/data.csv");  // Please Adjust the path to your CSV file
+    dataManager.loadData("data.csv");  // Please Adjust the path to your CSV file
     updateChart(dataManager.getData());
 }
 

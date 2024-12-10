@@ -1,0 +1,7 @@
+<RCC>
+  <qresource prefix="/i18n">
+    <file alias="watertool_de.qm">/uolstore/home/users/sc23a2a/Downloads/Group-Project-main (1)/Water Quality Monitoring/build/watertool_de.qm</file>
+    <file alias="watertool_fr.qm">/uolstore/home/users/sc23a2a/Downloads/Group-Project-main (1)/Water Quality Monitoring/build/watertool_fr.qm</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,7 @@
+# Hashes of file build rules.
+b68ad95fad2c8e522ea21dcb6c0acf96 .rcc/qrc_watertool_translations.cpp
+d56a08053d45d1f524a2e63856bd8240 CMakeFiles/watertool_autogen
+fa04fb45344dc700facd997781bdc004 CMakeFiles/watertool_lrelease
+3ec2c31b509fd48e3d084f30da180faa CMakeFiles/watertool_lupdate
+b47a5abe84be54381c079a3bd6777093 watertool_de.qm
+7b65b9d7092b5e80b0386f61bbbc4108 watertool_fr.qm
