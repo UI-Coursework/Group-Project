@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget* parent) : QMainWindow(parent) {
     tabWidget->addTab(new OverviewPage(), "Overview");
     tabWidget->addTab(new ComplianceDashboard(), "Compliance Dashboard");
     tabWidget->addTab(new EnviWindow(), "Environmental Litter");
-    tabWidget->addTab(createPage3(), "POP");
+    tabWidget->addTab(new FluorinatedCompounds(), "Fluorinated Compounds");
     setCentralWidget(tabWidget);
     setWindowTitle("Water Quality Monitoring");
     resize(1200, 800);
