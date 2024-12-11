@@ -115,7 +115,6 @@ Tabbed interface for seamless navigation between features via a top-left navigat
 
 ### **2. Dashboard**
 - **Summary View**: Card-based layout showing pollutant-level overviews.
-- **Interactive Elements**: Language selector and footer for navigation.
 - **Use Case**: Identifies safe, moderate, or dangerous pollution levels.
 
 ### **3. Pollutant Overview Page**
