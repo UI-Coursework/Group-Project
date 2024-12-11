@@ -22,7 +22,7 @@ This application monitors and analyzes water quality data, focusing on pollutant
 ### **Software Requirements**
 - **CMake** (Version `3.16` or newer): For building the project and managing dependencies.
 - **Qt6 Framework**:
-  - Required Modules: `Qt6::Widgets`, `Qt6::Charts`, `Qt6::LinguistTools` (for internationalization).
+  - Required Modules: `Qt6::Widgets`, `Qt6::Charts`, `Qt6::LinguistTools`.
 - **C++ Compiler**:
   - Minimum Standard: `C++17`
   - Supported Compilers: GCC 7.2+, Clang 5.0+, MSVC 15.7+.
@@ -47,12 +47,6 @@ This application monitors and analyzes water quality data, focusing on pollutant
 ### **Notes**
 - Ensure **Qt6 Framework** is properly installed and available in the system path.
 - Verify the data source location to ensure correct display of data. Bare in mind that only loading specific locations and pollutants will display on charts and graphs.
-
----
-
-## **Dependencies**
-- **Qt6 Framework**: Includes QtCharts and QtWidgets modules.
-- ....
 
 ---
 
