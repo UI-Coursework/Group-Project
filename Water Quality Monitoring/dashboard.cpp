@@ -30,19 +30,15 @@ void Dashboard::createHeader() {
     QVBoxLayout* headerLayout = new QVBoxLayout();
 
     // App Title
-    QLabel* title = new QLabel("Water Quality Monitor");
+    QLabel* title = new QLabel(tr("Water Quality Monitor"));
     title->setStyleSheet("font-size: 24px; font-weight: bold; margin: 10px;");
     title->setAlignment(Qt::AlignCenter);
 
-    // Language Selector
-    QComboBox* languageComboBox = new QComboBox();
-    languageComboBox->addItems({"English", "French", "German"}); // Add languages
-    languageComboBox->setFixedWidth(120);
 
     // Horizontal Layout for Language Selector
     QHBoxLayout* languageLayout = new QHBoxLayout();
     languageLayout->addStretch();
-    languageLayout->addWidget(languageComboBox);
+    // languageLayout->addWidget(languageComboBox);
 
     // Add the title and language selector to the header
     headerLayout->addWidget(title);
@@ -58,8 +54,8 @@ void Dashboard::createMainContent() {
     gridLayout->setSpacing(20); // Add spacing between cards
 
     int row = 0, col = 0;
-    const int maxColumns = 2; // Fixed 2x2 grid
-    const int maxCards = 4;   // Show exactly 4 cards
+    const int maxColumns = 4; // Fixed 4x4 grid
+    const int maxCards = 16;   // Show exactly 16 cards
 
     int count = 0;
     for (auto it = averageValues.begin(); it != averageValues.end() && count < maxCards; ++it) {
@@ -77,11 +73,12 @@ void Dashboard::createMainContent() {
         QVBoxLayout* cardLayout = new QVBoxLayout(card);
 
         QLabel* locationLabel = new QLabel(location);
-        locationLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: black;");
+        locationLabel->setStyleSheet("font-size: 14px; font-weight: bold; color: black;");
         locationLabel->setAlignment(Qt::AlignCenter);
+        locationLabel->setWordWrap(true);
 
         QLabel* averageLabel = new QLabel(QString::number(average, 'f', 2));
-        averageLabel->setStyleSheet("font-size: 18px; font-weight: bold; color: black;");
+        averageLabel->setStyleSheet("font-size: 20px; font-weight: bold; color: black;");
         averageLabel->setAlignment(Qt::AlignCenter);
 
         cardLayout->addWidget(locationLabel);
@@ -107,9 +104,9 @@ void Dashboard::createMainContent() {
 void Dashboard::createFooter() {
     QHBoxLayout* footerLayout = new QHBoxLayout();
 
-    QPushButton* userGuideButton = new QPushButton("User Guide");
-    QPushButton* helpButton = new QPushButton("Help");
-    QPushButton* creditsButton = new QPushButton("Credits");
+    QPushButton* userGuideButton = new QPushButton(tr("User Guide"));
+    QPushButton* helpButton = new QPushButton(tr("Help"));
+    QPushButton* creditsButton = new QPushButton(tr("Credits"));
 
     footerLayout->addWidget(userGuideButton);
     footerLayout->addStretch();
