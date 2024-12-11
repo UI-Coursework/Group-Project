@@ -1,6 +1,9 @@
 #ifndef OVERVIEWPAGE_HPP
 #define OVERVIEWPAGE_HPP
 
+#include "charttooltip.hpp"
+#include "csv.hpp"
+#include <set>
 #include <QWidget>
 #include <QComboBox>
 #include <QTableWidget>
@@ -19,9 +22,7 @@
 #include <QHeaderView>
 #include <vector>
 #include <QString>
-#include "charttooltip.hpp"  // Include the custom tooltip header
-#include "csv.hpp"
-#include <set>
+
 
 // Define the PollutantData structure
 struct overviewData {
@@ -29,7 +30,7 @@ struct overviewData {
     QString location;
     QString date;
     double value;
-    QString unit; // New field for unit
+    QString unit; 
 };
 
 class OverviewPage : public QWidget {
