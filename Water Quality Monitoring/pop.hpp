@@ -58,4 +58,4 @@ private:
     QChartView* mainChartView;
 };
 
-#endif // POP_H
+#endif

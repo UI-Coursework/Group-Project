@@ -41,24 +41,20 @@ private slots:
 private:
     static const double PFAS_THRESHOLD;
     Ui::FluorinatedCompounds *ui;
-    
-    // Chart components
+
     QChartView *chartView;
     QChart *chart;
     QDateTimeAxis *axisX;
     QValueAxis *axisY;
-    
-    // UI Components
+
     QComboBox *locationComboBox;
     QComboBox *startDateComboBox;
     QComboBox *endDateComboBox;
     QTableWidget *detailsTable;
     QPushButton *loadButton;
-    
-    // Data storage
+
     std::vector<PFASData> dataCache;
-    
-    // Member functions
+
     void setupUI();
     void loadData();
     void updateChart();
