@@ -103,7 +103,8 @@ void OverviewPage::loadData() {
             QString::fromStdString(row["determinand.definition"].get<std::string>()),
             QString::fromStdString(row["sample.samplingPoint.label"].get<std::string>()),
             QString::fromStdString(row["sample.sampleDateTime"].get<std::string>()).split('T')[0],
-            row["result"].get<double>()
+            row["result"].get<double>(),
+            QString::fromStdString(row["determinand.unit.label"].get<std::string>())  // Load unit
         };
 
         dataCache.push_back(data);
@@ -210,9 +211,11 @@ void OverviewPage::updateChart() {
         series->attachAxis(barAxisX);
 
         axisY = new QValueAxis;
-        axisY->setTitleText("Pollutant Value");
+        QString yAxisTitle = QString("Pollutant Value (%1)").arg(dataCache[0].unit);
+        axisY->setTitleText(yAxisTitle);
         chart->addAxis(axisY, Qt::AlignLeft);
         series->attachAxis(axisY);
+
 
         connect(series, &QBarSeries::hovered, this, [=](bool status, int index, QBarSet* barset) {
             if (status) {
