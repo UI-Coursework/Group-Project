@@ -52,7 +52,7 @@ This application monitors and analyzes water quality data, focusing on pollutant
 
 ## **Dependencies**
 - **Qt6 Framework**: Includes QtCharts and QtWidgets modules.
-- Additional dependencies, if any, are specified in the project folder.
+- ....
 
 ---
 
