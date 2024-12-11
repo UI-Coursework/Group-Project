@@ -7,7 +7,7 @@
 
 OverviewPage::OverviewPage(QWidget* parent)
     : QWidget(parent)
-    , isLineChart(true)
+    , isLineChart(false)
     , axisX(nullptr)
     , axisY(nullptr)
     , barAxisX(nullptr)
@@ -80,7 +80,7 @@ void OverviewPage::setupUI() {
     chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    toggleChartButton = new QPushButton(tr("Switch to Bar Chart"));
+    toggleChartButton = new QPushButton(tr("Switch to Line Chart"));
     connect(toggleChartButton, &QPushButton::clicked, this, &OverviewPage::toggleChartType);
 
     rightColumn->addWidget(chartView);
