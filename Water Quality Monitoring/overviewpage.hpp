@@ -6,6 +6,7 @@
 #include <QTableWidget>
 #include <QPushButton>
 #include <QtCharts/QChartView>
+#include <QtCharts/QChart>
 #include <QtCharts/QLineSeries>
 #include <QtCharts/QBarSeries>
 #include <QtCharts/QBarSet>
@@ -19,8 +20,8 @@
 #include <vector>
 #include <QString>
 #include "charttooltip.hpp"  // Include the custom tooltip header
-
-// QT_CHARTS_USE_NAMESPACE
+#include "csv.hpp"
+#include <set>
 
 // Define the PollutantData structure
 struct overviewData {
@@ -28,6 +29,7 @@ struct overviewData {
     QString location;
     QString date;
     double value;
+    QString unit; // New field for unit
 };
 
 class OverviewPage : public QWidget {
@@ -38,7 +40,7 @@ public:
 
 private slots:
     void onLoadButtonClicked();
-    void toggleChartType();
+    // void toggleChartType();
     void updateLocationComboBox(const QString& pollutant);
     void updateDateComboBoxes(const QString& location);
 

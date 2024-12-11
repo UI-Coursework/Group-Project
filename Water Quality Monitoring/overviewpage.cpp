@@ -1,5 +1,6 @@
 #include "overviewpage.hpp"
 #include "csv.hpp"
+#include <QString>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QDateTime>
@@ -80,8 +81,8 @@ void OverviewPage::setupUI() {
     chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
 
-    toggleChartButton = new QPushButton(tr("Switch to Line Chart"));
-    connect(toggleChartButton, &QPushButton::clicked, this, &OverviewPage::toggleChartType);
+    // toggleChartButton = new QPushButton(tr("Switch to Line Chart"));
+    // connect(toggleChartButton, &QPushButton::clicked, this, &OverviewPage::toggleChartType);
 
     rightColumn->addWidget(chartView);
     rightColumn->addWidget(toggleChartButton);
@@ -102,8 +103,10 @@ void OverviewPage::loadData() {
             QString::fromStdString(row["determinand.definition"].get<std::string>()),
             QString::fromStdString(row["sample.samplingPoint.label"].get<std::string>()),
             QString::fromStdString(row["sample.sampleDateTime"].get<std::string>()).split('T')[0],
-            row["result"].get<double>()
+            row["result"].get<double>(),
+            QString::fromStdString(row["determinand.unit.label"].get<std::string>())  // Load unit
         };
+
         dataCache.push_back(data);
         pollutants.insert(data.pollutant);
     }
@@ -142,46 +145,46 @@ void OverviewPage::updateChart() {
     QString endDate = endDateComboBox->currentText();
 
     if (isLineChart) {
-        QLineSeries* series = new QLineSeries();
+        // QLineSeries* series = new QLineSeries();
 
-        for (const auto& data : dataCache) {
-            if (data.pollutant == selectedPollutant &&
-                data.location == selectedLocation &&
-                data.date >= startDate &&
-                data.date <= endDate) {
+        // for (const auto& data : dataCache) {
+        //     if (data.pollutant == selectedPollutant &&
+        //         data.location == selectedLocation &&
+        //         data.date >= startDate &&
+        //         data.date <= endDate) {
 
-                QDateTime dateTime = QDateTime::fromString(data.date, "yyyy-MM-dd");
-                if (dateTime.isValid()) {
-                    series->append(dateTime.toMSecsSinceEpoch(), data.value);
-                }
-            }
-        }
+        //         QDateTime dateTime = QDateTime::fromString(data.date, "yyyy-MM-dd");
+        //         if (dateTime.isValid()) {
+        //             series->append(dateTime.toMSecsSinceEpoch(), data.value);
+        //         }
+        //     }
+        // }
 
-        chart->addSeries(series);
+        // chart->addSeries(series);
 
-        axisX = new QDateTimeAxis;
-        axisX->setFormat("dd-MM-yyyy");
-        axisX->setTitleText("Date");
-        chart->addAxis(axisX, Qt::AlignBottom);
-        series->attachAxis(axisX);
+        // axisX = new QDateTimeAxis;
+        // axisX->setFormat("dd-MM-yyyy");
+        // axisX->setTitleText("Date");
+        // chart->addAxis(axisX, Qt::AlignBottom);
+        // series->attachAxis(axisX);
 
-        axisY = new QValueAxis;
-        axisY->setTitleText("Pollutant Value");
-        chart->addAxis(axisY, Qt::AlignLeft);
-        series->attachAxis(axisY);
+        // axisY = new QValueAxis;
+        // axisY->setTitleText("Pollutant Value");
+        // chart->addAxis(axisY, Qt::AlignLeft);
+        // series->attachAxis(axisY);
 
-        connect(series, &QLineSeries::hovered, this, [=](const QPointF& point, bool state) {
-            if (state) {
-                QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(point.x()));
-                QString tooltipText = QString("Date: %1\nValue: %2").arg(dateTime.toString("dd-MM-yyyy")).arg(point.y());
-                tooltip->setText(tooltipText);
-                tooltip->setPos(chartView->mapToScene(chartView->mapFromGlobal(QCursor::pos())));
-                tooltip->setVisible(true);
-            }
-            else {
-                tooltip->setVisible(false);
-            }
-            });
+        // connect(series, &QLineSeries::hovered, this, [=](const QPointF& point, bool state) {
+        //     if (state) {
+        //         QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(point.x()));
+        //         QString tooltipText = QString("Date: %1\nValue: %2\nCompliance Status: ").arg(dateTime.toString("dd-MM-yyyy")).arg(point.y());
+        //         tooltip->setText(tooltipText);
+        //         tooltip->setPos(chartView->mapToScene(chartView->mapFromGlobal(QCursor::pos())));
+        //         tooltip->setVisible(true);
+        //     }
+        //     else {
+        //         tooltip->setVisible(false);
+        //     }
+        //     });
     }
     else {
         QBarSeries* series = new QBarSeries();
@@ -208,13 +211,15 @@ void OverviewPage::updateChart() {
         series->attachAxis(barAxisX);
 
         axisY = new QValueAxis;
-        axisY->setTitleText("Pollutant Value");
+        QString yAxisTitle = QString("Pollutant Value (%1)").arg(dataCache[0].unit);
+        axisY->setTitleText(yAxisTitle);
         chart->addAxis(axisY, Qt::AlignLeft);
         series->attachAxis(axisY);
 
+
         connect(series, &QBarSeries::hovered, this, [=](bool status, int index, QBarSet* barset) {
             if (status) {
-                QString tooltipText = QString("Date: %1\nValue: %2").arg(dates[index]).arg(barset->at(index));
+                QString tooltipText = QString("Date: %1\nValue: %2\nCompliance Status: ").arg(dates[index]).arg(barset->at(index));
                 tooltip->setText(tooltipText);
                 tooltip->setPos(chartView->mapToScene(chartView->mapFromGlobal(QCursor::pos())));
                 tooltip->setVisible(true);
@@ -269,12 +274,12 @@ void OverviewPage::onLoadButtonClicked() {
     updateChart();
 }
 
-void OverviewPage::toggleChartType() {
-    isLineChart = !isLineChart;
-    toggleChartButton->setText(isLineChart ?
-        tr("Switch to Bar Chart") : tr("Switch to Line Chart"));
-    updateChart();
-}
+// void OverviewPage::toggleChartType() {
+//     isLineChart = !isLineChart;
+//     toggleChartButton->setText(isLineChart ?
+//         tr("Switch to Bar Chart") : tr("Switch to Line Chart"));
+//     updateChart();
+// }
 
 void OverviewPage::updateLocationComboBox(const QString& pollutant) {
     locationComboBox->clear();
