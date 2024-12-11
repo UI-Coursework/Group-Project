@@ -19,6 +19,7 @@ private:
     void createHeader();
     void createMainContent();
     void createFooter();
+    void showCreditsPopup();
     void populateCards(QGridLayout* layout);
     void loadData();
     void processData();
