@@ -10,15 +10,15 @@ ComplianceDashboard::ComplianceDashboard(QWidget* parent) : QWidget(parent)
 {
     // Create filters
     locationFilter = new QComboBox();
-    locationFilter->addItem("All Locations");
+    locationFilter->addItem(tr("All Locations"));
 
     pollutantFilter = new QComboBox();
-    pollutantFilter->addItem("All Pollutants");
+    pollutantFilter->addItem(tr("All Pollutants"));
 
     statusFilter = new QComboBox();
-    statusFilter->addItem("All Statuses");
-    statusFilter->addItem("Compliant");
-    statusFilter->addItem("Non-Compliant");
+    statusFilter->addItem(tr("All Statuses"));
+    statusFilter->addItem(tr("Compliant"));
+    statusFilter->addItem(tr("Non-Compliant"));
 
     // Create compliance list
     complianceList = new QListWidget();
@@ -27,7 +27,7 @@ ComplianceDashboard::ComplianceDashboard(QWidget* parent) : QWidget(parent)
     connect(complianceList, &QListWidget::itemClicked, this, &ComplianceDashboard::onItemClicked);
 
     // Create refresh button
-    refreshButton = new QPushButton("Refresh");
+    refreshButton = new QPushButton(tr("Refresh"));
     connect(refreshButton, &QPushButton::clicked, this, &ComplianceDashboard::onRefreshClicked);
 
     // Layout
@@ -142,13 +142,13 @@ void ComplianceDashboard::updateFilters()
     }
 
     locationFilter->clear();
-    locationFilter->addItem("All Locations");
+    locationFilter->addItem(tr("All Locations"));
     for (const QString& location : locations) {
         locationFilter->addItem(location);
     }
 
     pollutantFilter->clear();
-    pollutantFilter->addItem("All Pollutants");
+    pollutantFilter->addItem(tr("All Pollutants"));
     for (const QString& pollutant : pollutants) {
         pollutantFilter->addItem(pollutant);
     }
