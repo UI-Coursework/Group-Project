@@ -9,6 +9,7 @@
 #include <QTextStream>
 #include <QDebug>
 #include <numeric>
+#include <QMessageBox>
 
 Dashboard::Dashboard(QWidget* parent) : QWidget(parent) {
     mainLayout = new QVBoxLayout(this);
@@ -108,12 +109,19 @@ void Dashboard::createFooter() {
     QPushButton* helpButton = new QPushButton(tr("Help"));
     QPushButton* creditsButton = new QPushButton(tr("Credits"));
 
+    connect(creditsButton, &QPushButton::clicked, this, &Dashboard::showCreditsPopup);
+
     footerLayout->addWidget(userGuideButton);
     footerLayout->addStretch();
     footerLayout->addWidget(helpButton);
     footerLayout->addWidget(creditsButton);
 
     mainLayout->addLayout(footerLayout);
+}
+
+void Dashboard::showCreditsPopup() {
+    QMessageBox::information(this, tr("Credits"), tr("All the data used in this application is received from: <a href='https://environment.data.gov.uk/water-quality/view/doc/reference'>Here</a>"));
+    
 }
 
 void Dashboard::loadData() {
