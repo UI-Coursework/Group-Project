@@ -19,6 +19,11 @@
 - Add support for advanced statistical analysis.
 - Implement user authentication for multi-user access control.
 
+## Build Instructions
+- mkdir build && cd build && cmake ..
+- make
+- ./watertool
+
 ## Team Members
 - Mohamed Aik Shamir 
 - Hpone Thu 
