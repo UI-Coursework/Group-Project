@@ -104,7 +104,7 @@ void OverviewPage::loadData() {
             QString::fromStdString(row["sample.samplingPoint.label"].get<std::string>()),
             QString::fromStdString(row["sample.sampleDateTime"].get<std::string>()).split('T')[0],
             row["result"].get<double>(),
-            QString::fromStdString(row["determinand.unit.label"].get<std::string>())  // Load unit
+            QString::fromStdString(row["determinand.unit.label"].get<std::string>())  
         };
 
         dataCache.push_back(data);
@@ -144,49 +144,7 @@ void OverviewPage::updateChart() {
     QString startDate = startDateComboBox->currentText();
     QString endDate = endDateComboBox->currentText();
 
-    if (isLineChart) {
-        // QLineSeries* series = new QLineSeries();
-
-        // for (const auto& data : dataCache) {
-        //     if (data.pollutant == selectedPollutant &&
-        //         data.location == selectedLocation &&
-        //         data.date >= startDate &&
-        //         data.date <= endDate) {
-
-        //         QDateTime dateTime = QDateTime::fromString(data.date, "yyyy-MM-dd");
-        //         if (dateTime.isValid()) {
-        //             series->append(dateTime.toMSecsSinceEpoch(), data.value);
-        //         }
-        //     }
-        // }
-
-        // chart->addSeries(series);
-
-        // axisX = new QDateTimeAxis;
-        // axisX->setFormat("dd-MM-yyyy");
-        // axisX->setTitleText("Date");
-        // chart->addAxis(axisX, Qt::AlignBottom);
-        // series->attachAxis(axisX);
-
-        // axisY = new QValueAxis;
-        // axisY->setTitleText("Pollutant Value");
-        // chart->addAxis(axisY, Qt::AlignLeft);
-        // series->attachAxis(axisY);
-
-        // connect(series, &QLineSeries::hovered, this, [=](const QPointF& point, bool state) {
-        //     if (state) {
-        //         QDateTime dateTime = QDateTime::fromMSecsSinceEpoch(static_cast<qint64>(point.x()));
-        //         QString tooltipText = QString("Date: %1\nValue: %2\nCompliance Status: ").arg(dateTime.toString("dd-MM-yyyy")).arg(point.y());
-        //         tooltip->setText(tooltipText);
-        //         tooltip->setPos(chartView->mapToScene(chartView->mapFromGlobal(QCursor::pos())));
-        //         tooltip->setVisible(true);
-        //     }
-        //     else {
-        //         tooltip->setVisible(false);
-        //     }
-        //     });
-    }
-    else {
+    
         QBarSeries* series = new QBarSeries();
         QBarSet* barSet = new QBarSet("Values");
 
@@ -228,7 +186,6 @@ void OverviewPage::updateChart() {
                 tooltip->setVisible(false);
             }
             });
-    }
 
     chart->setTitle(QString("%1 Measurements at %2")
         .arg(selectedPollutant)
@@ -274,12 +231,6 @@ void OverviewPage::onLoadButtonClicked() {
     updateChart();
 }
 
-// void OverviewPage::toggleChartType() {
-//     isLineChart = !isLineChart;
-//     toggleChartButton->setText(isLineChart ?
-//         tr("Switch to Bar Chart") : tr("Switch to Line Chart"));
-//     updateChart();
-// }
 
 void OverviewPage::updateLocationComboBox(const QString& pollutant) {
     locationComboBox->clear();
