@@ -100,7 +100,7 @@ Monitoring/
 1. **Performance Delays**: Slight delays during startup and page transitions.
 2. **Map Functionality**: Relies on static placeholder data; full implementation pending.
 3. **Footer Placeholder**: Dashboard footer lacks functionality.
-4. **Chart Functionality**: Line charts removed due to inconsistent performance; only bar charts remain.
+4. **Chart Functionality**: Inconsistent performance with charts.
 5. **Compliance Thresholds**: Missing data for compliance thresholds may cause inaccuracies.
 6. **Data Loading Strategy**: Individual page data loading causes performance issues.
 7. **Code Modularity**: Functions could be further modularized into separate files.
